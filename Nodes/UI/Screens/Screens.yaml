@@ -1,2 +1,8 @@
 Name: Screens
+Id: g=b9ce5c3b848370039143a83b55edc94b
 Type: ScreensCategoryFolder
+Children:
+- Name: ProductosQuimicos
+  Id: g=2075e641f5b0af68798c54f2bb85eba4
+  Supertype: Screen
+  ReferenceType: HasComponent
