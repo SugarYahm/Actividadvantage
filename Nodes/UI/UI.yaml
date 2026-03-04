@@ -339,6 +339,7 @@ Children:
           Id: g=8cba0b9f87e22623e38a03986260c366
           Type: NodePointer
           DataType: NodeId
+          Value: "/Objects/Actividadvantage/UI/Screens/ProductosQuimicos"
           Children:
           - Name: Kind
             Id: g=34e2d72bc1412a2ca80f2e52a386f8cf
