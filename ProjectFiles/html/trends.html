@@ -1,0 +1,262 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <style>
+    :root{ --bg:#f6f8fa; --text:#111827; --panel:#ffffff; --border:#e5e7eb; --muted:#4b5563; }
+    html,body{ height:100%; margin:0; background:var(--bg); color:var(--text); font-family:Arial; }
+    #chart{ width:100%; height:100%; }
+
+    #panel{
+      position: fixed;
+      left: 12px; top: 12px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      padding: 10px;
+      display: flex;
+      gap: 10px;
+      align-items: end;
+      flex-wrap: wrap;
+      z-index: 9999;
+      font-size: 12px;
+      max-width: calc(100% - 24px);
+    }
+    .field{ display:flex; flex-direction:column; gap:4px; }
+    .field label{ color: var(--muted); font-size: 11px; }
+    input{
+      font-size: 12px;
+      padding: 6px 8px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--text);
+      min-width: 170px;
+    }
+    button{
+      padding: 7px 10px;
+      border: 1px solid var(--border);
+      background: #fff;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+      font-size: 12px;
+    }
+  </style>
+
+  <script src="/echarts.min.js"></script>
+</head>
+
+<body>
+  <div id="chart"></div>
+
+  <div id="panel">
+    <div class="field">
+      <label>From</label>
+      <input id="from" type="datetime-local" step="1">
+    </div>
+    <div class="field">
+      <label>To</label>
+      <input id="to" type="datetime-local" step="1">
+    </div>
+    <button id="apply">Aplicar</button>
+    <button id="toggle">Pausar</button>
+  </div>
+
+  <script>
+    const el = (id) => document.getElementById(id);
+
+    if (!window.echarts) throw new Error("ECharts not loaded. Revisa /echarts.min.js");
+    const chart = echarts.init(el("chart"), "light");
+
+    const refreshMs = 1000;
+    let autoUpdate = true;
+    let timer = null;
+
+    // -----------------------------
+    // URL helpers (solo fechas)
+    // -----------------------------
+    function getParams() {
+      const p = new URLSearchParams(window.location.search);
+      return {
+        from: p.get("from") || "",
+        to: p.get("to") || ""
+      };
+    }
+
+    function setParamsInUrl({ from, to }) {
+      const p = new URLSearchParams(window.location.search);
+
+      if (from) p.set("from", from); else p.delete("from");
+      if (to)   p.set("to", to);     else p.delete("to");
+
+      const newUrl = `${window.location.pathname}?${p.toString()}`;
+      history.replaceState(null, "", newUrl);
+    }
+
+    function dtToIsoNoTZ(raw) {
+      if (!raw) return "";
+      const s = String(raw).trim();
+
+      // ISO ideal (datetime-local estándar)
+      if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(s)) {
+        return s.length === 16 ? (s + ":00") : s;
+      }
+
+      // Fallback: intentar parsear formato local
+      const d = new Date(s);
+      if (!isNaN(d.getTime())) {
+        const yyyy = d.getFullYear();
+        const mm   = String(d.getMonth() + 1).padStart(2, "0");
+        const dd   = String(d.getDate()).padStart(2, "0");
+        const hh   = String(d.getHours()).padStart(2, "0");
+        const mi   = String(d.getMinutes()).padStart(2, "0");
+        const ss   = String(d.getSeconds()).padStart(2, "0");
+        return `${yyyy}-${mm}-${dd}T${hh}:${mi}:${ss}`;
+      }
+
+      return "";
+    }
+
+    function buildApiUrlFromUi() {
+      const from = dtToIsoNoTZ(el("from").value);
+      const to   = dtToIsoNoTZ(el("to").value);
+
+      setParamsInUrl({ from, to });
+
+      const q = new URLSearchParams();
+      if (from) q.set("from", from);
+      if (to)   q.set("to", to);
+
+      return `/api/trends?${q.toString()}`;
+    }
+
+    // -----------------------------
+    // ECharts
+    // -----------------------------
+    function buildOption(source) {
+      const numVars = source.length - 1;
+
+      const lineSeries = Array.from({ length: numVars }, () => ({
+        type: "line",
+        smooth: true,
+        seriesLayoutBy: "row",
+        showSymbol: false,
+        emphasis: { focus: "series" }
+      }));
+
+      const isNarrow = window.innerWidth < 950;
+
+      return {
+        backgroundColor: "#f6f8fa",
+        legend: {},
+        tooltip: { trigger: "axis", showContent: false },
+        dataset: { source },
+        xAxis: { type: "category" },
+        yAxis: { type: "value" },
+        grid: { top: "55%" },
+        series: [
+          ...lineSeries,
+          {
+            type: "pie",
+            id: "pie",
+            radius: isNarrow ? "26%" : "30%",
+            center: isNarrow ? ["68%","28%"] : ["70%","25%"],
+            emphasis: { focus: "self" },
+            label: { formatter: "{b}: {@[1]} ({d}%)" },
+            encode: { itemName: "tag", value: 1, tooltip: 1 }
+          }
+        ]
+      };
+    }
+
+    function setPieToDimension(dimIndex) {
+      chart.setOption({
+        series: {
+          id: "pie",
+          label: { formatter: "{b}: {@[" + dimIndex + "]} ({d}%)" },
+          encode: { value: dimIndex, tooltip: dimIndex }
+        }
+      });
+    }
+
+    function setPieToLatest(source) {
+      const lastDim = source[0].length - 1;
+      if (lastDim >= 1) setPieToDimension(lastDim);
+    }
+
+    function wireAxisPointer() {
+      chart.off("updateAxisPointer");
+      chart.on("updateAxisPointer", (event) => {
+        const xAxisInfo = event.axesInfo && event.axesInfo[0];
+        if (!xAxisInfo) return;
+        const dim = xAxisInfo.value + 1;
+        setPieToDimension(dim);
+      });
+    }
+
+    chart.getZr().on("globalout", () => {
+      const opt = chart.getOption();
+      const src = opt.dataset && opt.dataset[0] && opt.dataset[0].source;
+      if (src && src[0] && src[0].length > 1) setPieToLatest(src);
+    });
+
+    async function tick() {
+      const apiUrl = buildApiUrlFromUi();
+
+      const res = await fetch(apiUrl, { cache: "no-store" });
+      const text = await res.text();
+
+      let data;
+      try { data = JSON.parse(text); }
+      catch { throw new Error("Respuesta no-JSON"); }
+
+      if (data.error) throw new Error(data.error);
+      if (!data.source || !Array.isArray(data.source) || data.source.length < 2)
+        throw new Error("API sin datos (source vacío o inválido)");
+
+      chart.setOption(buildOption(data.source), true);
+      wireAxisPointer();
+      setPieToLatest(data.source);
+      chart.resize();
+    }
+
+    function startAutoUpdate() {
+      if (timer) return;
+      autoUpdate = true;
+      timer = setInterval(() => tick().catch(console.error), refreshMs);
+      el("toggle").textContent = "Pausar";
+    }
+
+    function stopAutoUpdate() {
+      autoUpdate = false;
+      if (timer) clearInterval(timer);
+      timer = null;
+      el("toggle").textContent = "Reanudar";
+    }
+
+    el("toggle").addEventListener("click", () => {
+      if (autoUpdate) stopAutoUpdate();
+      else startAutoUpdate();
+    });
+
+    el("apply").addEventListener("click", () => {
+      tick().catch(console.error);
+    });
+
+    window.addEventListener("resize", () => chart.resize());
+
+    (function initFromUrl() {
+      const p = getParams();
+      if (p.from) el("from").value = p.from;
+      if (p.to)   el("to").value   = p.to;
+    })();
+
+    tick().catch(console.error);
+    startAutoUpdate();
+  </script>
+</body>
+</html>

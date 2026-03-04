@@ -1,28 +1,24 @@
 Name: Model
-Id: g=3f03da87d01c57ae8fd325d44a7e93a0
 Type: ModelCategoryFolder
 Children:
 - Name: NivelTanque1
-  Id: g=ddf0b013bade32703ae68821e0acbafc
   Type: BaseDataVariableType
-  DataType: Int32
+  DataType: Double
 - Name: NivelTanque2
-  Id: g=af706b78dd28534ae08a5ae3a2aefb2a
   Type: BaseDataVariableType
-  DataType: Int32
+  DataType: Double
 - Name: NivelTanque3
-  Id: g=53497d6504e5136c3de3c1ec356b2cb6
   Type: BaseDataVariableType
-  DataType: Int32
+  DataType: Double
 - Name: Bomba_Run
-  Id: g=228be7d2c8682b3db694d113d2019f21
   Type: BaseDataVariableType
   DataType: Boolean
 - Name: CaudalDeDosificación
-  Id: g=77986688bf15e15ba27e01c8518c0441
   Type: BaseDataVariableType
-  DataType: Int32
+  DataType: Double
 - Name: pH_Mezcla
-  Id: g=1ef8f607b1f2087c5356096dfe12e51d
   Type: BaseDataVariableType
-  DataType: Int32
+  DataType: Double
+- Name: CaudalDeDosificación_Actual
+  Type: BaseDataVariableType
+  DataType: Double
