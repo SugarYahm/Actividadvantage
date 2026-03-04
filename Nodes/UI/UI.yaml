@@ -329,3 +329,4 @@ Children:
       Value: 3
 - File: Screens/Screens.yaml
 - File: Keyboards/Keyboards.yaml
+- File: Types/Types.yaml
