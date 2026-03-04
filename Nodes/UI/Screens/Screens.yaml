@@ -4711,7 +4711,7 @@ Children:
         - Name: DynamicLink
           Type: DynamicLink
           DataType: NodePath
-          Value: "/Objects/Actividadvantage/Model/NivelTanque1"
+          Value: "/Objects/Actividadvantage/Model/NivelTanqueAgua"
           Children:
           - Name: Mode
             Type: BaseVariableType
@@ -4789,7 +4789,7 @@ Children:
         - Name: DynamicLink
           Type: DynamicLink
           DataType: NodePath
-          Value: "/Objects/Actividadvantage/Model/NivelTanque2"
+          Value: "/Objects/Actividadvantage/Model/NivelTanqueQuimico"
           Children:
           - Name: Mode
             Type: BaseVariableType
@@ -4867,7 +4867,7 @@ Children:
         - Name: DynamicLink
           Type: DynamicLink
           DataType: NodePath
-          Value: "/Objects/Actividadvantage/Model/NivelTanque3"
+          Value: "/Objects/Actividadvantage/Model/NivelTanqueMezcla"
           Children:
           - Name: Mode
             Type: BaseVariableType
@@ -5000,7 +5000,7 @@ Children:
         - Name: DynamicLink
           Type: DynamicLink
           DataType: NodePath
-          Value: "/Objects/Actividadvantage/Model/CaudalDeDosificación"
+          Value: "/Objects/Actividadvantage/Model/CaudalDeAgua"
           Children:
           - Name: Mode
             Type: BaseVariableType
