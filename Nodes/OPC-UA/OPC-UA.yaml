@@ -1,24 +1,55 @@
 Name: 'OPC-UA'
-Id: g=5a316654e6a02687be04a7b2225f1002
 Type: OPCUACategoryFolder
 Children:
 - Name: OPCUAServer
-  Id: g=54f4a57f93d1c6ed28c7503e4bacf5a5
   Type: OPCUAServer
   Children:
   - Name: EndpointURL
-    Id: g=0748b68b8ef23fea72876e57c1efd44c
     Type: PropertyType
     DataType: ResourceUri
     Value: "opc.tcp://localhost:59100"
   - Name: NodesToPublish
-    Id: g=58426fafd568b14b8c7288fcc57080c8
     Type: BaseObjectType
+    Children:
+    - Name: Configuration1
+      Type: NodesToPublishConfigurationEntry
+      Children:
+      - Name: Nodes
+        Type: BaseObjectType
+        Children:
+        - Name: Node1
+          Type: NodePointer
+          DataType: NodeId
+          Value: "/Objects/Actividadvantage/Model"
+          Children:
+          - Name: Kind
+            Type: PropertyType
+            DataType: NodeId
+          - Name: NodeClass
+            Type: PropertyType
+            DataType: NodePointerNodeClass
+            Value: 2
+      - Name: Users
+        Type: BaseObjectType
+        Children:
+        - Name: User1
+          Type: NodePointer
+          DataType: NodeId
+          Value: "/Objects/Users/Anonymous"
+          Children:
+          - Name: Kind
+            Type: PropertyType
+            DataType: NodeId
+            Value: "/Types/ObjectTypes/BaseObjectType/UserType"
+          - Name: NodeClass
+            Type: PropertyType
+            DataType: NodePointerNodeClass
+      - Name: PublishDynamicConfiguration
+        Type: BaseDataVariableType
+        DataType: Boolean
   - Name: MinimumMessageSecurityMode
-    Id: g=4d22aa0c8a4e48b8a5230fc1880d86a0
     Type: PropertyType
     DataType: MessageSecurityModeEnum
   - Name: MinimumSecurityPolicy
-    Id: g=1b652c478ab5c97d6d768edff5fc3c54
     Type: PropertyType
     DataType: SecurityPolicyEnum
