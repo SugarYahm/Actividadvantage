@@ -28,6 +28,7 @@ Children:
       Type: BaseVariableType
       DataType: Size
       ModellingRule: Optional
+      Value: 87.0
     - Name: FontSize
       Type: BaseDataVariableType
       DataType: Size
@@ -70,7 +71,7 @@ Children:
       Type: BaseVariableType
       DataType: Size
       ModellingRule: Optional
-      Value: 60.0
+      Value: 140.0
   - Name: Tuberias
     Type: Panel
     Children:
@@ -113,6 +114,7 @@ Children:
       - Name: ShowFlow
         Type: BaseDataVariableType
         DataType: Boolean
+        Value: true
       - Name: Width
         Type: BaseVariableType
         DataType: Size
@@ -342,6 +344,7 @@ Children:
       - Name: ShowFlow
         Type: BaseDataVariableType
         DataType: Boolean
+        Value: true
       - Name: Width
         Type: BaseVariableType
         DataType: Size
@@ -582,6 +585,7 @@ Children:
       - Name: ShowFlow
         Type: BaseDataVariableType
         DataType: Boolean
+        Value: true
       - Name: Width
         Type: BaseVariableType
         DataType: Size
@@ -822,6 +826,7 @@ Children:
       - Name: ShowFlow
         Type: BaseDataVariableType
         DataType: Boolean
+        Value: true
       - Name: Width
         Type: BaseVariableType
         DataType: Size
@@ -1038,7 +1043,7 @@ Children:
         Type: BaseVariableType
         DataType: Size
         ModellingRule: Optional
-        Value: 391.0
+        Value: 393.0
       - Name: FillMode
         Type: BaseDataVariableType
         DataType: FillModeEnum
@@ -1067,6 +1072,7 @@ Children:
       - Name: ShowFlow
         Type: BaseDataVariableType
         DataType: Boolean
+        Value: true
       - Name: Width
         Type: BaseVariableType
         DataType: Size
@@ -1270,7 +1276,7 @@ Children:
         Type: BaseVariableType
         DataType: Size
         ModellingRule: Optional
-        Value: 304.0
+        Value: 306.0
     - Name: PipeStraight7
       Type: ScaleLayout
       WriteMask: BrowseName|DataType|Description|DisplayName|MinimumSamplingInterval|UserAccessLevel
@@ -1290,6 +1296,7 @@ Children:
       - Name: ShowFlow
         Type: BaseDataVariableType
         DataType: Boolean
+        Value: true
       - Name: Width
         Type: BaseVariableType
         DataType: Size
@@ -1532,6 +1539,7 @@ Children:
       - Name: ShowFlow
         Type: BaseDataVariableType
         DataType: Boolean
+        Value: true
       - Name: Width
         Type: BaseVariableType
         DataType: Size
@@ -1773,6 +1781,7 @@ Children:
       - Name: ShowFlow
         Type: BaseDataVariableType
         DataType: Boolean
+        Value: true
       - Name: Width
         Type: BaseVariableType
         DataType: Size
@@ -2013,6 +2022,7 @@ Children:
       - Name: ShowFlow
         Type: BaseDataVariableType
         DataType: Boolean
+        Value: true
       - Name: Width
         Type: BaseVariableType
         DataType: Size
@@ -2224,12 +2234,12 @@ Children:
         Type: BaseVariableType
         DataType: Size
         ModellingRule: Optional
-        Value: 704.0
+        Value: 702.0
       - Name: TopMargin
         Type: BaseVariableType
         DataType: Size
         ModellingRule: Optional
-        Value: 304.0
+        Value: 306.0
       - Name: FillMode
         Type: BaseDataVariableType
         DataType: FillModeEnum
@@ -2253,6 +2263,7 @@ Children:
       - Name: ShowFlow
         Type: BaseDataVariableType
         DataType: Boolean
+        Value: true
       - Name: Width
         Type: BaseVariableType
         DataType: Size
@@ -2493,6 +2504,7 @@ Children:
       - Name: ShowFlow
         Type: BaseDataVariableType
         DataType: Boolean
+        Value: true
       - Name: Width
         Type: BaseVariableType
         DataType: Size
@@ -2733,6 +2745,7 @@ Children:
       - Name: ShowFlow
         Type: BaseDataVariableType
         DataType: Boolean
+        Value: true
       - Name: Width
         Type: BaseVariableType
         DataType: Size
@@ -2962,6 +2975,7 @@ Children:
       - Name: ShowFlow
         Type: BaseDataVariableType
         DataType: Boolean
+        Value: true
       - Name: Width
         Type: BaseVariableType
         DataType: Size
@@ -3160,12 +3174,12 @@ Children:
         Type: BaseVariableType
         DataType: Size
         ModellingRule: Optional
-        Value: 424.0
+        Value: 425.0
       - Name: TopMargin
         Type: BaseVariableType
         DataType: Size
         ModellingRule: Optional
-        Value: 420.0
+        Value: 411.0
     - Name: PipeStraight6
       Type: ScaleLayout
       WriteMask: BrowseName|DataType|Description|DisplayName|MinimumSamplingInterval|UserAccessLevel
@@ -3185,6 +3199,7 @@ Children:
       - Name: ShowFlow
         Type: BaseDataVariableType
         DataType: Boolean
+        Value: true
       - Name: Width
         Type: BaseVariableType
         DataType: Size
@@ -4487,77 +4502,29 @@ Children:
       Type: BaseVariableType
       DataType: Size
       ModellingRule: Optional
-      Value: 40.0
+      Value: 50.0
     - Name: TopMargin
       Type: BaseVariableType
       DataType: Size
       ModellingRule: Optional
-      Value: 523.0
-  - Name: Label2
-    Type: Label
-    Children:
-    - Name: Text
-      Type: BaseDataVariableType
-      DataType: LocalizedText
-      Children:
-      - Name: DynamicLink
-        Type: DynamicLink
-        DataType: NodePath
-        Value: "/Objects/Actividadvantage/Model/pH_Mezcla"
-    - Name: LeftMargin
-      Type: BaseVariableType
-      DataType: Size
-      ModellingRule: Optional
-      Value: 1010.0
-    - Name: TopMargin
-      Type: BaseVariableType
-      DataType: Size
-      ModellingRule: Optional
-      Value: 706.0
-    - Name: FontSize
-      Type: BaseDataVariableType
-      DataType: Size
-      ModellingRule: Optional
-      Value: 20.0
+      Value: 600.0
   - Name: Label3
     Type: Label
     Children:
     - Name: Text
       Type: BaseDataVariableType
       DataType: LocalizedText
-      Value: {"LocaleId":"en-US","Text":" (SP)"}
+      Value: {"LocaleId":"en-US","Text":" SP"}
     - Name: LeftMargin
       Type: BaseVariableType
       DataType: Size
       ModellingRule: Optional
-      Value: 490.0
+      Value: 310.0
     - Name: TopMargin
       Type: BaseVariableType
       DataType: Size
       ModellingRule: Optional
-      Value: 560.0
-    - Name: FontSize
-      Type: BaseDataVariableType
-      DataType: Size
-      ModellingRule: Optional
-      Value: 20.0
-  - Name: Label4
-    Type: Label
-    Children:
-    - Name: Text
-      Type: BaseDataVariableType
-      DataType: LocalizedText
-      Value: {"LocaleId":"en-US","Text":"pH"}
-    - Name: LeftMargin
-      Type: BaseVariableType
-      DataType: Size
-      ModellingRule: Optional
-      Value: 973.0
-    - Name: TopMargin
-      Type: BaseVariableType
-      DataType: Size
-      ModellingRule: Optional
-      Value: 706.0
+      Value: 626.0
     - Name: FontSize
       Type: BaseDataVariableType
       DataType: Size
@@ -4584,82 +4551,34 @@ Children:
       Type: BaseVariableType
       DataType: Size
       ModellingRule: Optional
-      Value: 110.0
+      Value: 40.0
     - Name: LeftMargin
       Type: BaseVariableType
       DataType: Size
       ModellingRule: Optional
-      Value: 600.0
+      Value: 360.0
     - Name: TopMargin
       Type: BaseVariableType
       DataType: Size
       ModellingRule: Optional
-      Value: 562.0
-  - Name: Label1
-    Type: Label
-    Children:
-    - Name: Text
-      Type: BaseDataVariableType
-      DataType: LocalizedText
-      Children:
-      - Name: DynamicLink
-        Type: DynamicLink
-        DataType: NodePath
-        Value: "/Objects/Actividadvantage/Model/CaudalDeDosificacion"
-    - Name: LeftMargin
-      Type: BaseVariableType
-      DataType: Size
-      ModellingRule: Optional
-      Value: 610.0
-    - Name: TopMargin
-      Type: BaseVariableType
-      DataType: Size
-      ModellingRule: Optional
-      Value: 600.0
-    - Name: FontSize
-      Type: BaseDataVariableType
-      DataType: Size
-      ModellingRule: Optional
-      Value: 20.0
+      Value: 628.0
   - Name: Label6
     Type: Label
     Children:
     - Name: Text
       Type: BaseDataVariableType
       DataType: LocalizedText
-      Value: {"LocaleId":"en-US","Text":"L/h"}
+      Value: {"LocaleId":"en-US","Text":"pH"}
     - Name: LeftMargin
       Type: BaseVariableType
       DataType: Size
       ModellingRule: Optional
-      Value: 718.0
+      Value: 479.0
     - Name: TopMargin
       Type: BaseVariableType
       DataType: Size
       ModellingRule: Optional
-      Value: 560.0
-    - Name: FontSize
-      Type: BaseDataVariableType
-      DataType: Size
-      ModellingRule: Optional
-      Value: 20.0
-  - Name: Label5
-    Type: Label
-    Children:
-    - Name: Text
-      Type: BaseDataVariableType
-      DataType: LocalizedText
-      Value: {"LocaleId":"en-US","Text":"Caudal "}
-    - Name: LeftMargin
-      Type: BaseVariableType
-      DataType: Size
-      ModellingRule: Optional
-      Value: 491.0
-    - Name: TopMargin
-      Type: BaseVariableType
-      DataType: Size
-      ModellingRule: Optional
-      Value: 600.0
+      Value: 626.0
     - Name: FontSize
       Type: BaseDataVariableType
       DataType: Size
@@ -4711,7 +4630,7 @@ Children:
         - Name: DynamicLink
           Type: DynamicLink
           DataType: NodePath
-          Value: "/Objects/Actividadvantage/Model/NivelTanque1"
+          Value: "/Objects/Actividadvantage/Model/NivelTanqueAgua"
           Children:
           - Name: Mode
             Type: BaseVariableType
@@ -4789,7 +4708,7 @@ Children:
         - Name: DynamicLink
           Type: DynamicLink
           DataType: NodePath
-          Value: "/Objects/Actividadvantage/Model/NivelTanque2"
+          Value: "/Objects/Actividadvantage/Model/NivelTanqueQuimico"
           Children:
           - Name: Mode
             Type: BaseVariableType
@@ -4867,7 +4786,7 @@ Children:
         - Name: DynamicLink
           Type: DynamicLink
           DataType: NodePath
-          Value: "/Objects/Actividadvantage/Model/NivelTanque3"
+          Value: "/Objects/Actividadvantage/Model/NivelTanqueMezcla"
           Children:
           - Name: Mode
             Type: BaseVariableType
@@ -5000,7 +4919,7 @@ Children:
         - Name: DynamicLink
           Type: DynamicLink
           DataType: NodePath
-          Value: "/Objects/Actividadvantage/Model/CaudalDeDosificación"
+          Value: "/Objects/Actividadvantage/Model/CaudalDeAgua"
           Children:
           - Name: Mode
             Type: BaseVariableType
