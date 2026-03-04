@@ -200,7 +200,6 @@ public class eChartLogic : BaseNetLogic
 
         var now = DateTime.Now;
 
-        // Si vienen from/to, úsalo. Si no, usa windowSec
         DateTime minTime = from ?? now.AddSeconds(-windowSec);
         DateTime maxTime = to   ?? now;
 

@@ -2,7 +2,7 @@ Name: DataStores
 Type: DataStoresCategoryFolder
 Children:
 - Name: DB_eChart
-  Id: g=2c0ea6d6947deb9339daaffa7dc73ed6
+  Id: g=75042c81a3639c24828ff92be2b746d9
   Type: SQLiteStore
   Children:
   - Name: Tables
@@ -32,13 +32,13 @@ Children:
         - Name: LocalTimestamp
           Type: StoreColumn
           DataType: DateTime
-        - Name: NivelTanque1
+        - Name: NivelTanqueQuimico
           Type: StoreColumn
           DataType: Double
-        - Name: NivelTanque2
+        - Name: NivelTanqueMezcla
           Type: StoreColumn
           DataType: Double
-        - Name: NivelTanque3
+        - Name: NivelTanqueAgua
           Type: StoreColumn
           DataType: Double
   - Class: Reference
@@ -99,3 +99,6 @@ Children:
   - Class: Reference
     Target: ns=19;i=59
     Direction: Forward
+  - Name: InMemory
+    Type: BaseDataVariableType
+    DataType: Boolean

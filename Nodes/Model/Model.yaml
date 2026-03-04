@@ -1,24 +1,32 @@
 Name: Model
 Type: ModelCategoryFolder
 Children:
-- Name: NivelTanque1
+- Name: NivelTanqueQuimico
   Type: BaseDataVariableType
   DataType: Double
-- Name: NivelTanque2
+  Value: 50.0
+- Name: NivelTanqueMezcla
   Type: BaseDataVariableType
   DataType: Double
-- Name: NivelTanque3
+  Value: 50.0
+- Name: NivelTanqueAgua
   Type: BaseDataVariableType
   DataType: Double
+  Value: 50.0
 - Name: Bomba_Run
   Type: BaseDataVariableType
   DataType: Boolean
-- Name: CaudalDeDosificación
-  Type: BaseDataVariableType
-  DataType: Double
 - Name: pH_Mezcla
   Type: BaseDataVariableType
   DataType: Double
-- Name: CaudalDeDosificación_Actual
+- Name: pH_Mezcla_SetPoint
   Type: BaseDataVariableType
   DataType: Double
+  Value: 7.1
+- Name: CaudalDeDosificacion
+  Type: BaseDataVariableType
+  DataType: Double
+- Name: CaudalDeAgua
+  Type: BaseDataVariableType
+  DataType: Double
+  Value: 200.0

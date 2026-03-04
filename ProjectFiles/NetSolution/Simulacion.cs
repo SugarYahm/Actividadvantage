@@ -20,42 +20,44 @@ public class Simulacion : BaseNetLogic
 {
     private PeriodicTask _task;
 
-    // Variables del Model
-    private IUAVariable _nivelTanque1;
-    private IUAVariable _nivelTanque2;
-    private IUAVariable _nivelTanque3;
-    private IUAVariable _bombaRun;
-    private IUAVariable _caudalDos;
-    private IUAVariable _caudalDosActual;
-    private IUAVariable _phMezcla;
-     // Estado interno del simulador
-    private readonly Random _rnd = new Random();
+    // Model vars
+    private IUAVariable NivelAgua, NivelQuim, NivelMix;
+    private IUAVariable BombaRun;
+    private IUAVariable pH, pHsp;
+    private IUAVariable Qchem, Qwater; // opcional: para mostrar "caudales" 0..100
 
-    private double _flowActualLph = 0.0;     // Caudal "real" (L/h) con inercia
-    private double _ph = 7.2;                // pH dinámico
-    private double _refill = 0.0;            // 0..1 -> indica si está en recarga
-    private double _t = 0.0;                 // tiempo para oscilaciones
+    // Estado interno
+    private double _ph = 7.2;
+
+    // Refill con histéresis
+    private bool _refillAgua = false;
+    private bool _refillQuim = false;
+
     public override void Start()
     {
-        // Toma variables del Model por path
-        _nivelTanque1 = GetVar("Model/NivelTanque1");
-        _nivelTanque2 = GetVar("Model/NivelTanque2");
-        _nivelTanque3 = GetVar("Model/NivelTanque3");
-        _bombaRun     = GetVar("Model/Bomba_Run");
-        _caudalDos    = GetVar("Model/CaudalDeDosificación");
-        _phMezcla     = GetVar("Model/pH_Mezcla");
-        _caudalDosActual = GetVar("Model/CaudalDeDosificación_Actual");
+        NivelAgua = GetVar("Model/NivelTanqueAgua");
+        NivelQuim = GetVar("Model/NivelTanqueQuimico");
+        NivelMix  = GetVar("Model/NivelTanqueMezcla");
 
+        BombaRun = GetVar("Model/Bomba_Run");
 
-        // Valores iniciales recomendados (no obliga, pero ayuda)
-        if (_nivelTanque1.Value == null) _nivelTanque1.Value = 85.0;
-        if (_nivelTanque2.Value == null) _nivelTanque2.Value = 70.0;
-        if (_nivelTanque3.Value == null) _nivelTanque3.Value = 65.0;
-        if (_caudalDos.Value == null) _caudalDos.Value = 25.0; // L/h típico demo
-        if (_phMezcla.Value == null) _phMezcla.Value = _ph;
-        if (_caudalDosActual.Value == null) _caudalDosActual.Value = 0.0;
+        pH   = GetVar("Model/pH_Mezcla");
+        pHsp = GetVar("Model/pH_Mezcla_SetPoint");
 
-        // Ejecuta cada 200 ms
+        Qchem  = GetVar("Model/CaudalDeDosificacion"); // aquí lo usamos como "intensidad 0..100"
+        Qwater = GetVar("Model/CaudalDeAgua");         // "intensidad 0..100"
+
+        // Iniciales
+        if (NivelAgua.Value == null) NivelAgua.Value = 80.0;
+        if (NivelQuim.Value == null) NivelQuim.Value = 70.0;
+        if (NivelMix.Value  == null) NivelMix.Value  = 0.0;
+
+        if (pHsp.Value == null) pHsp.Value = 6.9;
+        if (pH.Value == null) pH.Value = _ph;
+
+        if (Qwater.Value == null) Qwater.Value = 60.0;
+        if (Qchem.Value == null)  Qchem.Value  = 0.0;
+
         _task = new PeriodicTask(Update, 200, LogicObject);
         _task.Start();
     }
@@ -68,111 +70,132 @@ public class Simulacion : BaseNetLogic
 
     private void Update()
     {
-        const double dt = 0.2; // 200 ms
+        const double dt = 0.2; // segundos
 
-        // Lee entradas
-        bool pumpOn = Convert.ToBoolean(_bombaRun.Value.Value);
-        double flowSet = ToDouble(_caudalDos.Value.Value, 0.0); // L/h (set)
-        flowSet = Clamp(flowSet, 0.0, 120.0);
+        bool on = Convert.ToBoolean(BombaRun.Value.Value);
 
-        double levelChem = ToDouble(_nivelTanque1.Value.Value, 80.0); // %
-        double levelMix  = ToDouble(_nivelTanque2.Value.Value, 70.0); // %
-        double levelRaw  = ToDouble(_nivelTanque3.Value.Value, 65.0); // %
+        double lvlW = Clamp(ToDouble(NivelAgua.Value.Value, 80.0), 0, 100);
+        double lvlC = Clamp(ToDouble(NivelQuim.Value.Value, 70.0), 0, 100);
+        double lvlM = Clamp(ToDouble(NivelMix.Value.Value, 0.0),  0, 100);
 
-        // --- 1) Lógica de recarga de químico (tanque 1) ---
-        // si baja de 10%, activa "refill"; cuando llegue a 90% se apaga
-        if (levelChem <= 10.0) _refill = 1.0;
-        if (levelChem >= 90.0) _refill = 0.0;
+        double sp = Clamp(ToDouble(pHsp.Value.Value, 6.9), 5.5, 8.5);
 
-        // recarga sube ~ 6 %/min cuando está activa
-        if (_refill > 0.5)
-            levelChem += 6.0 * (dt / 60.0);
+        // ----------------------------
+        // 1) Refill automático
+        // ----------------------------
+        // Agua
+        if (lvlW <= 10.0) _refillAgua = true;
+        if (lvlW >= 90.0) _refillAgua = false;
 
-        // --- 2) Caudal real con inercia (simula bomba + tubería) ---
-        // si tanque vacío, limita caudal
-        double tankFactor = (levelChem <= 2.0) ? 0.0 : 1.0;
+        if (_refillAgua) // refill también puede pasar con bomba OFF (según tu regla?)
+        {
+            // si quieres que refill ocurra siempre, quita "!on"
+            lvlW += 10.0 * (dt); // +10 % por segundo -> visible
+        }
 
-        double target = (pumpOn ? flowSet : 0.0) * tankFactor;
+        // Químico
+        if (lvlC <= 10.0) _refillQuim = true;
+        if (lvlC >= 90.0) _refillQuim = false;
 
-        // Primer orden (lag): flowActual sigue al target suavemente
-        const double tau = 1.5; // segundos (respuesta)
-        _flowActualLph += (target - _flowActualLph) * (dt / tau);
+        if (_refillQuim && !on)
+        {
+            lvlC += 18.0 * (dt); // +18 % por segundo
+        }
 
-        // ruido suave ±2%
-        _flowActualLph *= (1.0 + (Noise() * 0.02));
+        // ----------------------------
+        // 2) Si bomba OFF: nada se mueve, solo pH sube
+        // ----------------------------
+        if (!on)
+        {
+            // Congela niveles (pero aplica refill si estaba activo)
+            lvlW = Clamp(lvlW, 0, 100);
+            lvlC = Clamp(lvlC, 0, 100);
+            lvlM = Clamp(lvlM, 0, 100);
+            // Vaciar poquito a poquito cuando está OFF (goteo)
+            double outMixOff = 0.25 * dt;   // % por segundo aprox (ajustable)
+            lvlM -= outMixOff;
+            lvlM = Clamp(lvlM, 0, 100);
 
-        _flowActualLph = Clamp(_flowActualLph, 0.0, 130.0);
+            // pH sube hacia 7.2 (agua)
+            const double phBase = 7.2;
+            const double tau = 6.0; // segundos
+            _ph += (phBase - _ph) * (dt / tau);
+            _ph = Clamp(_ph, 5.5, 8.5);
 
-        // --- 3) Consumo de químico (tanque 1) ---
-        // Supongamos tanque químico de 200 L equivalentes a 100%
-        const double tankCapacityL = 200.0;
-        double litrosConsumidos = _flowActualLph * (dt / 3600.0);
-        double deltaPct = (litrosConsumidos / tankCapacityL) * 100.0;
+            // Escribe
+            NivelAgua.Value = lvlW;
+            NivelQuim.Value = lvlC;
+            NivelMix.Value  = lvlM;
 
-        if (pumpOn && _refill < 0.5)
-            levelChem -= deltaPct;
+            pH.Value = _ph;
 
-        levelChem = Clamp(levelChem, 0.0, 100.0);
+            // Caudales visuales en 0 cuando está apagada
+            Qwater.Value = 0.0;
+            Qchem.Value  = 0.0;
+            return;
+        }
 
-        // --- 4) Nivel del tanque de mezcla (tanque 2) ---
-        // Se mantiene estable, pero sube un poquito si dosificas, y oscila leve
-        _t += dt;
-        double osc = Math.Sin(_t * 0.5) * 0.15;      // oscilación lenta
-        double bump = (_flowActualLph / 120.0) * 0.08; // efecto dosificación
-        levelMix += (osc + bump) * 0.5;              // suaviza
-        levelMix = Clamp(levelMix, 40.0, 95.0);
+        // ----------------------------
+        // 3) Bomba ON: consumo y mezcla (0..100)
+        // ----------------------------
+        // Intensidad de agua (fija para demo)
+        double waterIntensity = 60.0; // 0..100 (simboliza caudal de agua)
+        // Intensidad de químico depende del setpoint:
+        // SP más bajo -> más químico.
+        // Mapeo: SP 7.2 => 0, SP 6.0 => 80 aprox
+        double chemIntensity = Clamp((7.2 - sp) * 65.0, 0.0, 100.0);
 
-        // --- 5) Nivel “agua cruda/proceso” (tanque 3) ---
-        // Simula demanda: onda + ruido
-        double demandWave = Math.Sin(_t * 0.25) * 0.30;
-        levelRaw += demandWave + (Noise() * 0.05);
-        levelRaw = Clamp(levelRaw, 35.0, 95.0);
+        // Guarda “caudales” como intensidades
+        Qwater.Value = waterIntensity;
+        Qchem.Value  = chemIntensity;
 
-        // --- 6) pH de mezcla ---
-        // Base de pH del agua cruda ~7.2
-        // El coagulante “ácido” baja pH proporcional al caudal (con saturación y dinámica)
-        const double phBase = 7.2;
-        double acidEffect = (_flowActualLph / 60.0) * 0.8; // 0..~1.6 aprox
-        acidEffect = Clamp(acidEffect, 0.0, 1.8);
+        // Consumo por segundo (visible)
+        double dW = (waterIntensity / 100.0) * 2.0 * dt; // hasta -6%/s
+        double dC = (chemIntensity  / 100.0) * 1.0 * dt; // hasta -4%/s
 
-        // objetivo de pH baja con dosificación; con bomba off regresa a base
-        double phTarget = phBase - acidEffect;
+        if (!_refillAgua) lvlW -= dW;
+        if (!_refillQuim) lvlC -= dC;
 
-        // dinámica lenta (mezcla): tauPh ~ 8 s
-        const double tauPh = 8.0;
-        _ph += (phTarget - _ph) * (dt / tauPh);
+        lvlW = Clamp(lvlW, 0, 100);
+        lvlC = Clamp(lvlC, 0, 100);
 
-        // ruido leve
-        _ph += Noise() * 0.01;
+        // Mezcla = suma de aportes 
+        double inMix = ((waterIntensity + chemIntensity) / 200.0) * 8.0 * dt; // hasta +8%/s
+        lvlM += inMix;
+        // --- dinámica para vaciar la mezcla (salida del proceso) ---
+        // salida base + salida proporcional a lo lleno que está
+        double outMix = (1.2 * dt) + (lvlM / 100.0) * (2.0 * dt);  // % que baja por tick
+        lvlM -= outMix;
 
+        // Clamp 0..100
+        lvlM = Clamp(lvlM, 0, 100);
+
+        // pH baja con químico e intenta acercarse al SP, pero con dinámica
+        double phTarget = 7.2 - (chemIntensity / 100.0) * 1.6; // hasta ~5.6
+        phTarget = 0.6 * phTarget + 0.4 * sp;
+
+        const double tauPH = 3.0;
+        _ph += (phTarget - _ph) * (dt / tauPH);
         _ph = Clamp(_ph, 5.5, 8.5);
 
-        // --- 7) Escribe salidas ---
-        _nivelTanque1.Value = levelChem;
-        _nivelTanque2.Value = levelMix;
-        _nivelTanque3.Value = levelRaw;
+        // ----------------------------
+        // 4) Refill 
+        // ----------------------------
+        if (lvlW <= 10.0) _refillAgua = true;
+        if (lvlC <= 10.0) _refillQuim = true;
 
-        // OJO: tu variable se llama CaudalDeDosificación, pero tú la puedes tratar como setpoint.
-        // Si quieres mostrar "caudal real", crea otra variable: CaudalDeDosificación_Actual
-        // y aquí se la asignas. Por ahora, dejamos el set tal cual y solo actualizamos pH.
-        _phMezcla.Value = _ph;
-        _caudalDosActual.Value = _flowActualLph;
+        // Escribe
+        NivelAgua.Value = lvlW;
+        NivelQuim.Value = lvlC;
+        NivelMix.Value  = lvlM;
+        pH.Value = _ph;
     }
 
-    // Helpers
     private IUAVariable GetVar(string path)
     {
-        // Busca desde el root del proyecto: "Model/..."
         var v = Project.Current.GetVariable(path);
-        if (v == null)
-            throw new Exception($"No se encontró la variable: {path}. Revisa que exista en Model.");
+        if (v == null) throw new Exception($"No se encontró variable: {path}");
         return v;
-    }
-
-    private double Noise()
-    {
-        // -1..+1
-        return (_rnd.NextDouble() * 2.0) - 1.0;
     }
 
     private static double Clamp(double x, double lo, double hi)

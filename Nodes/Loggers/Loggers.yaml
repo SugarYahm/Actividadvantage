@@ -20,7 +20,7 @@ Children:
   - Name: VariablesToLog
     Type: BaseObjectType
     Children:
-    - Name: NivelTanque1
+    - Name: NivelTanqueQuimico
       Type: VariableToLog
       DataType: BaseDataType
       Children:
@@ -39,13 +39,13 @@ Children:
       - Name: DynamicLink
         Type: DynamicLink
         DataType: NodePath
-        Value: "../../../../Model/NivelTanque1"
+        Value: "../../../../Model/NivelTanqueQuimico"
         Children:
         - Name: Mode
           Type: BaseVariableType
           DataType: DynamicLinkMode
           Value: 2
-    - Name: NivelTanque2
+    - Name: NivelTanqueMezcla
       Type: VariableToLog
       DataType: BaseDataType
       Children:
@@ -64,13 +64,13 @@ Children:
       - Name: DynamicLink
         Type: DynamicLink
         DataType: NodePath
-        Value: "../../../../Model/NivelTanque2"
+        Value: "../../../../Model/NivelTanqueMezcla"
         Children:
         - Name: Mode
           Type: BaseVariableType
           DataType: DynamicLinkMode
           Value: 2
-    - Name: NivelTanque3
+    - Name: NivelTanqueAgua
       Type: VariableToLog
       DataType: BaseDataType
       Children:
@@ -89,7 +89,7 @@ Children:
       - Name: DynamicLink
         Type: DynamicLink
         DataType: NodePath
-        Value: "../../../../Model/NivelTanque3"
+        Value: "../../../../Model/NivelTanqueAgua"
         Children:
         - Name: Mode
           Type: BaseVariableType
