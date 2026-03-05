@@ -127,8 +127,8 @@ public class eChartLogic : BaseNetLogic
 
         if (path.Equals("/api/trends", StringComparison.OrdinalIgnoreCase))
         {
-            int windowSec = Clamp(ParseInt(req.QueryString["windowSec"], 60), 1, 24 * 3600);
-            int points    = Clamp(ParseInt(req.QueryString["points"], 60), 2, 2000);
+            int windowSec = Clamp(ParseInt(req.QueryString["windowSec"], 300), 1, 24 * 3600);
+            int points    = Clamp(ParseInt(req.QueryString["points"], 300), 2, 2000);
 
             DateTime? from = ParseDate(req.QueryString["from"]);
             DateTime? to   = ParseDate(req.QueryString["to"]);
