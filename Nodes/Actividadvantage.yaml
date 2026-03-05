@@ -1,64 +1,51 @@
 Name: Actividadvantage
-Id: g=69c45cfd35921227275dcd523fd7ce15
 Type: ProjectFolder
 Children:
 - Name: Localization
-  Id: g=6ad6217c6d1a861689a3008ca4af79b4
   Type: PropertyGroup
   Children:
   - Name: Locales
-    Id: g=c9c045a6c383362cf00374f99c365eed
     Type: BaseDataVariableType
     DataType: LocaleId
     ValueRank: OneDimension
     ArrayDimensions: [0]
     Value: ["en-US"]
   - Name: LocaleFallbackList
-    Id: g=86ba299416bc252340385f1354efd936
     Type: BaseDataVariableType
     DataType: LocaleId
     ValueRank: OneDimension
     ArrayDimensions: [0]
     Value: ["en-US"]
 - Name: Authentication
-  Id: g=e644265dba690b711e51bc9daf2a446a
   Type: PropertyGroup
   Children:
   - Name: DefaultUserFolder
-    Id: g=18bf3fba61aa85c8d4bc6869f8c79cd8
     Type: NodePointer
     DataType: NodeId
     Value: "/Objects/Actividadvantage/Security/Users"
     Children:
     - Name: Kind
-      Id: g=85637e9dbcd4e625637cf59b825805df
       Type: PropertyType
       DataType: NodeId
       Value: "/Types/ObjectTypes/BaseObjectType/FolderType"
 - Name: PasswordPolicy
-  Id: g=5cf8b64fab5158066cf51594f1dc603c
   Type: PasswordPolicy
   Children:
   - Name: MaximumPasswordAge
-    Id: g=986fb59a3a3de9f83145e17bd16be3ff
     Type: BaseDataVariableType
     DataType: UInt16
   - Name: EnforcePasswordHistory
-    Id: g=721501700a7f0bcf8d0d1b024956ddda
     Type: BaseDataVariableType
     DataType: Byte
     Value: 1
   - Name: MinimumPasswordAge
-    Id: g=dc5e63e3059d9338499619a2d3955933
     Type: BaseDataVariableType
     DataType: UInt16
   - Name: MinimumPasswordLength
-    Id: g=7c6b759a425a1095732630ffac35022d
     Type: BaseDataVariableType
     DataType: Byte
     Value: 8
 - Name: AlarmConfiguration
-  Id: g=227178aa2acec763644e2de7d6d7355c
   Type: PropertyGroup
 - File: UI/UI.yaml
 - File: Model/Model.yaml
@@ -77,5 +64,4 @@ Children:
 - File: Translations/Translations.yaml
 - File: Retentivity/Retentivity.yaml
 - Name: RuntimeOptimization
-  Id: g=97e49b0f473f4be0974894ff9ef6e9b2
   Type: PropertyGroup
