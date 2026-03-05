@@ -41,6 +41,10 @@ Children:
         - Name: NivelTanqueAgua
           Type: StoreColumn
           DataType: Double
+      - Name: RecordLimit
+        Type: BaseDataVariableType
+        DataType: UInt32
+        Value: 604800
   - Class: Reference
     Target: ns=21;i=30
     Direction: Forward
