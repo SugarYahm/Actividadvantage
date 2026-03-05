@@ -76,3 +76,6 @@ Children:
 - File: System/System.yaml
 - File: Translations/Translations.yaml
 - File: Retentivity/Retentivity.yaml
+- Name: RuntimeOptimization
+  Id: g=97e49b0f473f4be0974894ff9ef6e9b2
+  Type: PropertyGroup

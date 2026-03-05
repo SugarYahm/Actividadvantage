@@ -22,3 +22,8 @@ Children:
     Id: g=1b652c478ab5c97d6d768edff5fc3c54
     Type: PropertyType
     DataType: SecurityPolicyEnum
+  - Name: CertificateIsExpired
+    Id: g=108521f6f498ab9631b4faef3ebbade1
+    Type: BaseDataVariableType
+    DataType: Boolean
+    AccessLevel: Read

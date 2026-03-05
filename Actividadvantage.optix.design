@@ -1,12 +1,13 @@
 Project:
  Name: Actividadvantage_Design
  ProjectNamespaceIndex: 4
+ DisplayName: ''
  Description: ''
  Company: ''
  Copyright: ''
  FormatVersion: 1
- ProductVersion: 1.6
- CoreVersion: 4.2
+ ProductVersion: 1.7
+ CoreVersion: 5.0
  Dependencies:
   2:
    Uri: Actividadvantage
@@ -14,7 +15,7 @@ Project:
   3:
    Uri: 'urn:FTOptix:CoreBase'
    Module: FTOptix.CoreBase
-   Version: 5.0
+   Version: 6.1
  Statistics:
   TotalNodeCount: 0
   Objects: 0
