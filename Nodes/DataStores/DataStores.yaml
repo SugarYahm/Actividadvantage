@@ -9,6 +9,7 @@ Children:
     Type: BaseObjectType
     Children:
     - Name: Logger_eChart_Table
+      Id: g=d2585f4841b2bd3863c45d68ba60f743
       Type: SQLiteStoreTable
       Children:
       - Class: Reference
