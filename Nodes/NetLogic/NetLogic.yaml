@@ -11,6 +11,7 @@ Children:
   - Name: CSVPath
     Type: BaseDataVariableType
     DataType: AbsoluteResourceUri
+    Value: "file:///C:/Users/ASUS/OneDrive/Escritorio/FTOptix/Vantage.csv"
   - Name: FieldDelimiter
     Type: BaseDataVariableType
     DataType: String
@@ -78,6 +79,74 @@ Children:
       "Body": {
        "libraryGuid": "f0701375ee41467993d632db6a8fdaa5",
        "objectGuid": "c85ea2a2a38ceb1f69d250e09bc6f4d9",
+       "objectVersion": 1,
+       "highestIgnoredVersion": 0
+      }
+     }
+- Name: GenericTableExporter
+  Type: NetLogic
+  WriteMask: BrowseName|DataType|Description|DisplayName|MinimumSamplingInterval|UserAccessLevel
+  Children:
+  - Name: CSVPath
+    Type: BaseDataVariableType
+    DataType: AbsoluteResourceUri
+    Value: "file:///C:/Users/ASUS/OneDrive/Escritorio/FTOptix/Vantage.csv"
+  - Name: FieldDelimiter
+    Type: BaseDataVariableType
+    DataType: String
+    Value: ","
+  - Class: Method
+    Name: Export
+  - Name: Table
+    Type: NodePointer
+    DataType: NodeId
+    Value: "/Objects/Actividadvantage/DataStores/DB_eChart/Tables/Logger_eChart_Table"
+    Children:
+    - Name: Kind
+      Type: PropertyType
+      DataType: NodeId
+      Value: "/Types/ObjectTypes/BaseObjectType/Table"
+  - Name: Query
+    Type: BaseDataVariableType
+    DataType: String
+    Value: "SELECT * FROM"
+    Children:
+    - Name: StringFormatter1
+      Type: StringFormatter
+      Children:
+      - Name: Format
+        Type: BaseDataVariableType
+        DataType: LocalizedText
+        ReferenceType: HasParameter
+        Value: {"LocaleId":"en-US","Text":"SELECT * FROM {0:sql_identifier}"}
+      - Name: Source0
+        Type: BaseDataVariableType
+        DataType: BaseDataType
+        ReferenceType: HasSource
+        Children:
+        - Name: DynamicLink
+          Type: DynamicLink
+          DataType: NodePath
+          Value: "../../../Table@BrowseName"
+          Children:
+          - Name: Mode
+            Type: BaseVariableType
+            DataType: DynamicLinkMode
+  - Name: WrapFields
+    Type: BaseDataVariableType
+    DataType: Boolean
+  - Name: ns=4;LibraryReference
+    Type: ObjectLibraryReference
+    DataType: ObjectLibraryReferenceDataType
+    Value: 
+     {
+      "TypeId": {
+       "Id": 72,
+       "Namespace": 4
+      },
+      "Body": {
+       "libraryGuid": "f0701375ee41467993d632db6a8fdaa5",
+       "objectGuid": "c23f147ab2c551bda6501c8bad3f1ec9",
        "objectVersion": 1,
        "highestIgnoredVersion": 0
       }

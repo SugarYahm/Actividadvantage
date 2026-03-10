@@ -13,6 +13,7 @@ using FTOptix.OPCUAServer;
 using FTOptix.SQLiteStore;
 using FTOptix.Store;
 using FTOptix.DataLogger;
+using FTOptix.MQTTClient;
 #endregion
 
 

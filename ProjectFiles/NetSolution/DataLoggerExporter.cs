@@ -7,6 +7,7 @@ using FTOptix.NetLogic;
 using FTOptix.Store;
 using FTOptix.Core;
 using FTOptix.HMIProject;
+using FTOptix.MQTTClient;
 #endregion
 
 public class DataLoggerExporter : BaseNetLogic

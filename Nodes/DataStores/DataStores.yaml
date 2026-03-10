@@ -110,3 +110,174 @@ Children:
   - Class: Reference
     Target: ns=19;i=67
     Direction: Forward
+- Name: SchedulerDB
+  Id: g=eef022d861e7ddeb9a63e22dbc395663
+  Type: SQLiteStore
+  Children:
+  - Name: Tables
+    Type: BaseObjectType
+    Children:
+    - Name: Scheduler
+      Type: SQLiteStoreTable
+      Children:
+      - Class: Reference
+        Target: ns=19;i=12
+        Direction: Forward
+      - Class: Reference
+        Target: ns=19;i=15
+        Direction: Forward
+      - Class: Reference
+        Target: ns=19;i=21
+        Direction: Forward
+      - Class: Reference
+        Target: ns=19;i=20
+        Direction: Forward
+      - Name: Columns
+        Type: BaseObjectType
+        Children:
+        - Name: Day0
+          Type: StoreColumn
+          DataType: String
+        - Name: Day1
+          Type: StoreColumn
+          DataType: String
+        - Name: Day2
+          Type: StoreColumn
+          DataType: String
+        - Name: Day3
+          Type: StoreColumn
+          DataType: String
+        - Name: Day4
+          Type: StoreColumn
+          DataType: String
+        - Name: Day5
+          Type: StoreColumn
+          DataType: String
+        - Name: Day6
+          Type: StoreColumn
+          DataType: String
+  - Class: Reference
+    Target: ns=21;i=30
+    Direction: Forward
+  - Class: Reference
+    Target: ns=21;i=33
+    Direction: Forward
+  - Name: MaxColumnNameLength
+    Type: BaseDataVariableType
+    DataType: UInt32
+    AccessLevel: Read
+  - Name: MaxColumnCount
+    Type: BaseDataVariableType
+    DataType: UInt32
+    AccessLevel: Read
+  - Name: DataTypeCompatibilityMap
+    Type: BaseDataVariableType
+    DataType: NodeId
+    AccessLevel: Read
+    ValueRank: OneOrMoreDimensions
+    ArrayDimensions: [0,0]
+  - Name: Status
+    Type: PropertyType
+    DataType: StoreStatus
+    AccessLevel: Read
+    Value: 2
+  - Class: Reference
+    Target: ns=19;i=22
+    Direction: Forward
+  - Class: Reference
+    Target: ns=19;i=67
+    Direction: Forward
+  - Class: Reference
+    Target: ns=19;i=6
+    Direction: Forward
+  - Class: Reference
+    Target: ns=19;i=8
+    Direction: Forward
+  - Class: Reference
+    Target: ns=19;i=25
+    Direction: Forward
+  - Class: Reference
+    Target: ns=19;i=38
+    Direction: Forward
+  - Class: Reference
+    Target: ns=19;i=41
+    Direction: Forward
+  - Class: Reference
+    Target: ns=19;i=44
+    Direction: Forward
+  - Class: Reference
+    Target: ns=19;i=53
+    Direction: Forward
+  - Class: Reference
+    Target: ns=19;i=55
+    Direction: Forward
+  - Class: Reference
+    Target: ns=19;i=57
+    Direction: Forward
+  - Class: Reference
+    Target: ns=19;i=59
+    Direction: Forward
+  - Name: CheckCalendar
+    Type: BaseDataVariableType
+    DataType: Boolean
+  - Name: SchedulerLogic
+    Type: NetLogic
+    Children:
+    - Class: Method
+      Name: ExportNow
+    - Name: ExportAction
+      Type: MethodInvocation
+      Children:
+      - Name: ObjectPointer
+        Type: NodePointer
+        DataType: NodeId
+        Children:
+        - Name: Kind
+          Type: PropertyType
+          DataType: NodeId
+          Value: "/Types/ObjectTypes/BaseObjectType"
+        - Name: DynamicLink
+          Type: DynamicLink
+          DataType: NodePath
+          Value: "../../../../../NetLogic/GenericTableExporter@NodeId"
+          Children:
+          - Name: Mode
+            Type: BaseVariableType
+            DataType: DynamicLinkMode
+            Value: 2
+      - Name: Method
+        Type: BaseDataVariableType
+        DataType: String
+        Value: "Export"
+      - Class: Reference
+        Target: ns=2;i=98
+        Direction: Forward
+    - Name: SchedulerDB
+      Type: NodePointer
+      DataType: NodeId
+      Value: "/Objects/Actividadvantage/DataStores/SchedulerDB"
+      Children:
+      - Name: Kind
+        Type: PropertyType
+        DataType: NodeId
+    - Name: Active
+      Type: BaseDataVariableType
+      DataType: Boolean
+    - Name: ForceCheck
+      Type: BaseDataVariableType
+      DataType: Boolean
+    - Name: AutoEnable
+      Type: BaseDataVariableType
+      DataType: Boolean
+    - Name: ExportFolder
+      Type: BaseDataVariableType
+      DataType: String
+      Value: "0"
+    - Name: FilePrefix
+      Type: BaseDataVariableType
+      DataType: String
+      Value: "Vantage"
+    - Name: LastFiredKey
+      Type: BaseDataVariableType
+      DataType: Int32
+      Value: -1

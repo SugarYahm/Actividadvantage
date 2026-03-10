@@ -11,6 +11,7 @@ using UAManagedCore;
 using FTOptix.NetLogic;
 using FTOptix.HMIProject;
 using FTOptix.Store;
+using FTOptix.MQTTClient;
 #endregion
 
 public class eChartLogic : BaseNetLogic
