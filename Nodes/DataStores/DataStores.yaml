@@ -281,3 +281,20 @@ Children:
       Type: BaseDataVariableType
       DataType: Int32
       Value: -1
+    - Name: MethodInvocation1
+      Type: MethodInvocation
+      Children:
+      - Name: ObjectPointer
+        Type: NodePointer
+        DataType: NodeId
+        Children:
+        - Name: Kind
+          Type: PropertyType
+          DataType: NodeId
+          Value: "/Types/ObjectTypes/BaseObjectType"
+      - Name: Method
+        Type: BaseDataVariableType
+        DataType: String
+      - Class: Reference
+        Target: ns=2;i=98
+        Direction: Forward
