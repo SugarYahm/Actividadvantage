@@ -35,7 +35,7 @@ Children:
         - Name: User1
           Type: NodePointer
           DataType: NodeId
-          Value: "/Objects/Actividadvantage/Security/Users/Admin"
+          Value: "/Objects/Users/Anonymous"
           Children:
           - Name: Kind
             Type: PropertyType
@@ -53,23 +53,14 @@ Children:
   - Name: MinimumSecurityPolicy
     Type: PropertyType
     DataType: SecurityPolicyEnum
-  - Name: MaxNumberOfConnections
-    Type: BaseDataVariableType
-    DataType: UInt32
-    Value: 2
-  - Name: ProductURI
-    Type: BaseDataVariableType
-    DataType: String
-    Value: "urn:FactoryTalkOptixHMI:FTOptixApplication"
-  - Name: ServerCertificateFile
-    Type: PropertyType
-    DataType: ResourceUri
-    Value: "ns=7;%PROJECTDIR%/PKI/Own/Certs/optixhmi_cert.der"
-  - Name: ServerPrivateKeyFile
-    Type: PropertyType
-    DataType: ResourceUri
-    Value: "ns=7;%PROJECTDIR%/PKI/Own/Certs/optixhmi_cert.pem"
   - Name: CertificateIsExpired
     Type: BaseDataVariableType
     DataType: Boolean
     AccessLevel: Read
+  - Name: UseNodePathInNodeIds
+    Type: BaseDataVariableType
+    DataType: Boolean
+  - Name: SamplingInterval
+    Type: PropertyType
+    DataType: Duration
+    Value: "0:00:00:01.0000000"
