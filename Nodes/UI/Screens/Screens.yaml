@@ -312,12 +312,12 @@ Children:
         Type: BaseVariableType
         DataType: Size
         ModellingRule: Optional
-        Value: 466.0
+        Value: 465.0
       - Name: TopMargin
         Type: BaseVariableType
         DataType: Size
         ModellingRule: Optional
-        Value: 477.0
+        Value: 478.0
       - Name: Rotation
         Type: BaseVariableType
         DataType: Size
@@ -3165,7 +3165,7 @@ Children:
         Type: BaseVariableType
         DataType: Size
         ModellingRule: Optional
-        Value: 420.0
+        Value: 413.0
     - Name: PipeStraight6
       Type: ScaleLayout
       WriteMask: BrowseName|DataType|Description|DisplayName|MinimumSamplingInterval|UserAccessLevel

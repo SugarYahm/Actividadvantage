@@ -102,3 +102,6 @@ Children:
   - Name: InMemory
     Type: BaseDataVariableType
     DataType: Boolean
+  - Class: Reference
+    Target: ns=19;i=67
+    Direction: Forward

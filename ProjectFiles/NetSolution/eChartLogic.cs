@@ -11,6 +11,7 @@ using UAManagedCore;
 using FTOptix.NetLogic;
 using FTOptix.HMIProject;
 using FTOptix.Store;
+using FTOptix.OPCUAServer;
 #endregion
 
 public class eChartLogic : BaseNetLogic
@@ -24,7 +25,7 @@ public class eChartLogic : BaseNetLogic
 
     // ✅ Carpeta donde están gauge.html, trends.html y echarts.min.js
     private const string Folder =
-        @"C:\Users\Axel Ruiz\Documents\Rockwell Automation\FactoryTalk Optix\Projects\Actividadvantage\ProjectFiles\html";
+        @"C:\Users\HP\Documents\Rockwell Automation\FactoryTalk Optix\Projects\Actividadvantage\ProjectFiles\html";
 
     // ✅ Tabla del DataLogger
     private const string TrendTable = "Logger_eChart_Table";
