@@ -13,6 +13,7 @@ using FTOptix.OPCUAServer;
 using FTOptix.SQLiteStore;
 using FTOptix.Store;
 using FTOptix.DataLogger;
+using FTOptix.MQTTClient;
 #endregion
 
 
@@ -112,15 +113,15 @@ public class Simulacion : BaseNetLogic
             lvlC = Clamp(lvlC, 0, 100);
             lvlM = Clamp(lvlM, 0, 100);
             // Vaciar poquito a poquito cuando está OFF (goteo)
-            double outMixOff = 0.25 * dt;   // % por segundo aprox (ajustable)
+            double outMixOff = 0.5 * dt;   // % por segundo aprox (ajustable)
             lvlM -= outMixOff;
             lvlM = Clamp(lvlM, 0, 100);
 
             // pH sube hacia 7.2 (agua)
-            const double phBase = 7.2;
+            const double phBase = 10;
             const double tau = 6.0; // segundos
             _ph += (phBase - _ph) * (dt / tau);
-            _ph = Clamp(_ph, 5.5, 8.5);
+            _ph = Clamp(_ph, 5.5, 10);
 
             // Escribe
             NivelAgua.Value = lvlW;
@@ -176,7 +177,7 @@ public class Simulacion : BaseNetLogic
 
         const double tauPH = 3.0;
         _ph += (phTarget - _ph) * (dt / tauPH);
-        _ph = Clamp(_ph, 5.5, 8.5);
+        _ph = Clamp(_ph, 5.5, 10);
 
         // ----------------------------
         // 4) Refill 

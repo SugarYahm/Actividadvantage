@@ -11,7 +11,7 @@ using UAManagedCore;
 using FTOptix.NetLogic;
 using FTOptix.HMIProject;
 using FTOptix.Store;
-using FTOptix.OPCUAServer;
+using FTOptix.MQTTClient;
 #endregion
 
 public class eChartLogic : BaseNetLogic
@@ -25,7 +25,7 @@ public class eChartLogic : BaseNetLogic
 
     // ✅ Carpeta donde están gauge.html, trends.html y echarts.min.js
     private const string Folder =
-        @"C:\Users\HP\Documents\Rockwell Automation\FactoryTalk Optix\Projects\Actividadvantage\ProjectFiles\html";
+        @"C:\Users\Axel Ruiz\Documents\Rockwell Automation\FactoryTalk Optix\Projects\Actividadvantage\ProjectFiles\html";
 
     // ✅ Tabla del DataLogger
     private const string TrendTable = "Logger_eChart_Table";
@@ -128,8 +128,8 @@ public class eChartLogic : BaseNetLogic
 
         if (path.Equals("/api/trends", StringComparison.OrdinalIgnoreCase))
         {
-            int windowSec = Clamp(ParseInt(req.QueryString["windowSec"], 60), 1, 24 * 3600);
-            int points    = Clamp(ParseInt(req.QueryString["points"], 60), 2, 2000);
+            int windowSec = Clamp(ParseInt(req.QueryString["windowSec"], 300), 1, 24 * 3600);
+            int points    = Clamp(ParseInt(req.QueryString["points"], 300), 2, 2000);
 
             DateTime? from = ParseDate(req.QueryString["from"]);
             DateTime? to   = ParseDate(req.QueryString["to"]);
