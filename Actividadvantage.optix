@@ -91,15 +91,15 @@ Project:
    Module: FTOptix.OPCUAServer.Net
    Version: 2.0
  Statistics:
-  TotalNodeCount: 30001
-  Objects: 7170
-  ObjectTypes: 6
-  Variables: 22821
+  TotalNodeCount: 30256
+  Objects: 7212
+  ObjectTypes: 9
+  Variables: 23029
   VariableTypes: 0
   DataTypes: 0
-  Methods: 4
-  References: 45
+  Methods: 6
+  References: 49
   ReferenceTypes: 0
-  Files: 23
+  Files: 25
  Nodes:
  - File: Nodes/Actividadvantage.yaml

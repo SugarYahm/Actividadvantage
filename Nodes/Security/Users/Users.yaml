@@ -43,3 +43,80 @@ Children:
       ValueRank: OneDimension
       ArrayDimensions: [0]
       Value: [{"TypeId":{"Id":252,"Namespace":1},"Body":{"Hash":[83,64,13,246,76,100,200,210,79,21,167,34,58,167,82,246,238,3,170,111,13,65,141,204,197,226,13,153,86,2,121,87],"Salt":[68,91,222,3,252,231,249,242,183,102,92,212,112,64,140,174,149,188,218,158,255,20,14,6,254,76,144,187,38,101,255,47]}}]
+  - Name: LocaleId
+    Id: g=2d5ebd6d82fb97961ebdbf5c9e2c2f38
+    Type: BaseVariableType
+    DataType: LocaleId
+    ReferenceType: HasProperty
+    Value: "en-US"
+  - Name: Language
+    Id: g=76a40ebac38201ae78ae16ce780c2a98
+    Type: BaseVariableType
+    DataType: LocaleId
+    ReferenceType: HasProperty
+    Value: "en-US"
+  - Name: MeasurementSystem
+    Id: g=9b9f1e37dd949ba931a3009f449731d4
+    Type: BaseVariableType
+    DataType: MeasurementSystem
+    ReferenceType: HasProperty
+    Value: 1
+- Name: Operador
+  Id: g=65fb659281d9cc18a29832a57e262982
+  Type: UserType
+  Children:
+  - Name: Password
+    Id: g=3d9140021826b99984123ee04ea85afa
+    Type: Password
+    DataType: Password
+    ReferenceType: HasProperty
+    AccessLevel: Read
+    Children:
+    - Name: Hash
+      Id: g=3eaca9023302b027a31c8d3fab0a0063
+      Type: PropertyType
+      DataType: PasswordHash
+      AccessLevel: Read
+      Value: 
+       {
+        "TypeId": {
+         "Id": 252,
+         "Namespace": 1
+        },
+        "Body": {
+         "Hash": [248,51,137,155,181,106,0,39,96,203,207,176,46,66,218,62,70,124,163,72,42,106,45,233,83,9,193,247,84,33,174,142],
+         "Salt": [59,232,152,225,34,252,169,196,84,1,218,34,142,43,217,11,2,190,107,6,58,58,243,87,181,199,97,55,244,250,33,135]
+        }
+       }
+    - Name: ChangeTimestamp
+      Id: g=2e2d2421b3a8d1f14abf57943ea5d554
+      Type: PropertyType
+      DataType: UtcTime
+      AccessLevel: Read
+      Value: "2026-03-12T06:32:39.5621612"
+    - Name: History
+      Id: g=05a5bdca920ba6bd2b7a6edf78a447ce
+      Type: PropertyType
+      DataType: PasswordHash
+      AccessLevel: Read
+      ValueRank: OneDimension
+      ArrayDimensions: [0]
+      Value: [{"TypeId":{"Id":252,"Namespace":1},"Body":{"Hash":[248,51,137,155,181,106,0,39,96,203,207,176,46,66,218,62,70,124,163,72,42,106,45,233,83,9,193,247,84,33,174,142],"Salt":[59,232,152,225,34,252,169,196,84,1,218,34,142,43,217,11,2,190,107,6,58,58,243,87,181,199,97,55,244,250,33,135]}}]
+  - Name: LocaleId
+    Id: g=9479772d1031640edd8c854000f47d8e
+    Type: BaseVariableType
+    DataType: LocaleId
+    ReferenceType: HasProperty
+    Value: "en-US"
+  - Name: Language
+    Id: g=75999f4d3fdb8ed6b4028b1bc98a58cc
+    Type: BaseVariableType
+    DataType: LocaleId
+    ReferenceType: HasProperty
+    Value: "en-US"
+  - Name: MeasurementSystem
+    Id: g=734dfe40c4e8776b5b2519b573cffad6
+    Type: BaseVariableType
+    DataType: MeasurementSystem
+    ReferenceType: HasProperty
+    Value: 1

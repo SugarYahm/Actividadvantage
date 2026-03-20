@@ -2,65 +2,94 @@ Name: 'OPC-UA'
 Type: OPCUACategoryFolder
 Children:
 - Name: OPCUAServer
+  Id: g=505f5513354f88e45ec8f704aae18c97
   Type: OPCUAServer
   Children:
   - Name: EndpointURL
+    Id: g=d27aca42b07751d0fb75e4d6a4dd7acc
     Type: PropertyType
     DataType: ResourceUri
     Value: "opc.tcp://localhost:59100"
   - Name: NodesToPublish
+    Id: g=1f0c52603c3b1afa4fd364762a4bc911
     Type: BaseObjectType
     Children:
     - Name: Configuration1
+      Id: g=ddcf6b59f94b006b326372170797d077
       Type: NodesToPublishConfigurationEntry
       Children:
       - Name: Nodes
+        Id: g=a196459c85c697f67b1a4acac13a3703
         Type: BaseObjectType
         Children:
         - Name: Node1
+          Id: g=2e8a4cf068c0e7a958272fdbb80a9000
           Type: NodePointer
           DataType: NodeId
-          Value: "/Objects/Actividadvantage/Model"
+          Value: "/Objects/Actividadvantage/OPC-UA/OPCUAServer"
           Children:
           - Name: Kind
+            Id: g=a57b478094d732aec98975cca44dca9b
             Type: PropertyType
             DataType: NodeId
           - Name: NodeClass
+            Id: g=91305d0388b203a1b97b7d37c3c45593
             Type: PropertyType
             DataType: NodePointerNodeClass
             Value: 2
       - Name: Users
+        Id: g=a3de91b85899f54c529e4c21c1164223
         Type: BaseObjectType
         Children:
         - Name: User1
+          Id: g=838a0da175b07d92221a48f6004c77d6
           Type: NodePointer
           DataType: NodeId
-          Value: "/Objects/Users/Anonymous"
+          Value: "/Objects/Actividadvantage/Security/Users/Admin"
           Children:
           - Name: Kind
+            Id: g=4c7be28b1e3af583f09c4bd733c12737
             Type: PropertyType
             DataType: NodeId
             Value: "/Types/ObjectTypes/BaseObjectType/UserType"
           - Name: NodeClass
+            Id: g=4dba7883d552fb35b68d085c55ae5c43
             Type: PropertyType
             DataType: NodePointerNodeClass
       - Name: PublishDynamicConfiguration
+        Id: g=88ecdd2cb0044663b388aaa07bbbcae3
         Type: BaseDataVariableType
         DataType: Boolean
   - Name: MinimumMessageSecurityMode
+    Id: g=83ae962651f988e99338de1a191101d6
     Type: PropertyType
     DataType: MessageSecurityModeEnum
   - Name: MinimumSecurityPolicy
+    Id: g=4add7b10ceae9a6a0405d7e59d241e8c
     Type: PropertyType
     DataType: SecurityPolicyEnum
   - Name: CertificateIsExpired
+    Id: g=d0345dc1226352a5c9f9ec371bd62645
     Type: BaseDataVariableType
     DataType: Boolean
     AccessLevel: Read
-  - Name: UseNodePathInNodeIds
+  - Name: MaxNumberOfConnections
+    Id: g=d9548ff6cea52390142bcb3fdd5ad631
     Type: BaseDataVariableType
-    DataType: Boolean
+    DataType: UInt32
+    Value: 2
   - Name: SamplingInterval
+    Id: g=8919f86826a90805df61c543737d424e
     Type: PropertyType
     DataType: Duration
     Value: "0:00:00:01.0000000"
+  - Name: ServerCertificateFile
+    Id: g=bd8a1931e61b214ad5b7f8c3acb303b1
+    Type: PropertyType
+    DataType: ResourceUri
+    Value: "ns=7;%PROJECTDIR%/PKI/Own/Certs/optixhmi_cert.der"
+  - Name: ServerPrivateKeyFile
+    Id: g=b93e309c87d416692e693954b863ba86
+    Type: PropertyType
+    DataType: ResourceUri
+    Value: "ns=7;%PROJECTDIR%/PKI/Own/Certs/optixhmi_cert.pem"

@@ -25,7 +25,7 @@ public class eChartLogic : BaseNetLogic
 
     // ✅ Carpeta donde están gauge.html, trends.html y echarts.min.js
     private const string Folder =
-        @"C:\Users\Axel Ruiz\Documents\Rockwell Automation\FactoryTalk Optix\Projects\Actividadvantage\ProjectFiles\html";
+        @"C:\Users\Eneri\Documents\Optix\Projects\Actividadvantage\ProjectFiles\html";
 
     // ✅ Tabla del DataLogger
     private const string TrendTable = "Logger_eChart_Table";

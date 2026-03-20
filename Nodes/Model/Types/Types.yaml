@@ -1,0 +1,23 @@
+Name: Types
+Type: FolderType
+Children:
+- Name: Tanque
+  Id: g=84d47bf7ac5ef40190803df61fe18933
+  Supertype: BaseObjectType
+  Children:
+  - Name: NivelTanque
+    Type: BaseDataVariableType
+    DataType: Double
+  - Name: FillColor
+    Type: BaseDataVariableType
+    DataType: Color
+    Value: "#075982"
+  - Name: Fill
+    Type: BaseDataVariableType
+    DataType: Boolean
+  - Class: Method
+    Name: VaciarTanque
+    Id: g=1045d61b73a935a02c8113649d03ae00
+  - Class: Method
+    Name: LlenarTanque
+    Id: g=3c3c81aced057fc87213be29e606f58e

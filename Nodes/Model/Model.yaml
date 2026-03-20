@@ -1,41 +1,34 @@
 Name: Model
-Id: g=433131a5cd67bee4103dcf6d22c9a97c
 Type: ModelCategoryFolder
 Children:
 - Name: NivelTanqueQuimico
-  Id: g=24eb5ba2696a537cdfed61d096682976
   Type: BaseDataVariableType
   DataType: Double
   Value: 50.0
 - Name: NivelTanqueMezcla
-  Id: g=8d51550e014a4218d663f330c2c41903
   Type: BaseDataVariableType
   DataType: Double
   Value: 50.0
 - Name: NivelTanqueAgua
-  Id: g=2c1ad904932fbc3af2531e62fa017f34
   Type: BaseDataVariableType
   DataType: Double
   Value: 50.0
 - Name: Bomba_Run
-  Id: g=5c457cac393725cbfdb5b00ea533aea1
   Type: BaseDataVariableType
   DataType: Boolean
 - Name: pH_Mezcla
-  Id: g=1b13e70923bb40d3b4ba74891bc34214
   Type: BaseDataVariableType
   DataType: Double
 - Name: pH_Mezcla_SetPoint
-  Id: g=45b84a226b83a37b5ada4df6e4082ec4
   Type: BaseDataVariableType
   DataType: Double
   Value: 7.1
 - Name: CaudalDeDosificacion
-  Id: g=251e2f4a0c5bfb788129dd3a51577344
   Type: BaseDataVariableType
   DataType: Double
 - Name: CaudalDeAgua
-  Id: g=f5b9a717ef4421d0236d3f67bfe2051f
   Type: BaseDataVariableType
   DataType: Double
   Value: 200.0
+- File: Types/Types.yaml
+- File: Instances/Instances.yaml

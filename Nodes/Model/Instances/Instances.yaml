@@ -1,0 +1,63 @@
+Name: Instances
+Type: FolderType
+Children:
+- Name: TanqueAgua
+  Id: g=eb4991a5a206962cf70ea7d12e3eb781
+  Type: Tanque
+  Children:
+  - Name: NivelTanque
+    Type: BaseDataVariableType
+    DataType: Double
+    Children:
+    - Name: DynamicLink
+      Type: DynamicLink
+      DataType: NodePath
+      Value: "../../../NivelTanqueAgua"
+      Children:
+      - Name: Mode
+        Type: BaseVariableType
+        DataType: DynamicLinkMode
+        Value: 2
+  - Name: FillColor
+    Type: BaseDataVariableType
+    DataType: Color
+    Value: "#075982"
+  - Name: Fill
+    Type: BaseDataVariableType
+    DataType: Boolean
+  - Class: Reference
+    Target: g=1045d61b73a935a02c8113649d03ae00
+    Direction: Forward
+  - Class: Reference
+    Target: g=3c3c81aced057fc87213be29e606f58e
+    Direction: Forward
+- Name: TanqueQuimico
+  Id: g=02f2ae86aaf0ad958d3a1ddd26b8dd66
+  Type: Tanque
+  Children:
+  - Name: NivelTanque
+    Type: BaseDataVariableType
+    DataType: Double
+    Children:
+    - Name: DynamicLink
+      Type: DynamicLink
+      DataType: NodePath
+      Value: "../../../NivelTanqueQuimico"
+      Children:
+      - Name: Mode
+        Type: BaseVariableType
+        DataType: DynamicLinkMode
+        Value: 2
+  - Name: FillColor
+    Type: BaseDataVariableType
+    DataType: Color
+    Value: "#32ee00"
+  - Name: Fill
+    Type: BaseDataVariableType
+    DataType: Boolean
+  - Class: Reference
+    Target: g=1045d61b73a935a02c8113649d03ae00
+    Direction: Forward
+  - Class: Reference
+    Target: g=3c3c81aced057fc87213be29e606f58e
+    Direction: Forward

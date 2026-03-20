@@ -44,7 +44,7 @@ Children:
   - Name: MinimumPasswordLength
     Type: BaseDataVariableType
     DataType: Byte
-    Value: 8
+    Value: 4
 - Name: AlarmConfiguration
   Type: PropertyGroup
 - File: UI/UI.yaml
